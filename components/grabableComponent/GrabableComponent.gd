@@ -1,6 +1,7 @@
 class_name GrabableComponent
 extends Node
 
+signal grabbed(node: Node2D)
 signal dropped(node: Node2D)
 signal hovered()
 signal unhovered()
@@ -15,6 +16,7 @@ signal unhovered()
 @export var hoverScaleDuration: float = 0.15
 
 var _isDragging: bool = false
+var _isDragLocked: bool = false
 var _isHovered: bool = false
 var _originalScale: Vector2 = Vector2.ONE
 var _scaleTween: Tween = null
@@ -27,6 +29,7 @@ var _velocityX: float = 0.0
 
 
 func _ready() -> void:
+	add_to_group("grabable")
 	var parent := get_parent() as Node2D
 	if parent != null:
 		_originalRotation = parent.rotation
@@ -73,7 +76,7 @@ func _input(event: InputEvent) -> void:
 			_updateHoverState(parent)
 
 func _tryStartDrag() -> void:
-	if isGrabDisabled:
+	if isGrabDisabled or _isDragLocked:
 		return
 
 	var parent := get_parent() as Node2D
@@ -98,6 +101,7 @@ func _tryStartDrag() -> void:
 			_clickLocalOffset = parent.to_local(mousePos)
 			_lastMousePos = mousePos
 			get_viewport().set_input_as_handled()
+			grabbed.emit(parent)
 			return
 
 func _getClampedMousePos(parent: Node2D) -> Vector2:
@@ -202,6 +206,25 @@ func _tweenScale(targetScale: Vector2) -> void:
 
 func disableGrab(disable: bool) -> void:
 	isGrabDisabled = disable
+	if not disable:
+		var parent := get_parent() as Node2D
+		if parent != null:
+			_updateHoverState(parent)
+
+func isDragging() -> bool:
+	return _isDragging
+
+## Silently ends an in-progress drag without emitting "dropped" (used when the grabbed
+## node is about to be repositioned by other code, e.g. a merge animation, and should not
+## be treated as placed into whatever zone it happens to be over).
+func cancelDrag() -> void:
+	_isDragging = false
+
+## Blocks starting/continuing a drag (e.g. while a merge animation is repositioning this
+## card) without affecting hover, unlike disableGrab() which also suppresses hover/tooltip.
+func lockDrag() -> void:
+	_isDragLocked = true
+	cancelDrag()
 
 func resetToPreGrabPosition() -> void:
 	var parent := get_parent() as Node2D
