@@ -26,6 +26,9 @@ export_presets.cfg
 data_*/
 mono_crash.*.
 
+# Per-project secrets (see AnalyticsSecrets.gd.example)
+autoload/analyticsController/AnalyticsSecrets.gd
+
 # MacOS-specific ignores
 .DS_Store
 .AppleDouble

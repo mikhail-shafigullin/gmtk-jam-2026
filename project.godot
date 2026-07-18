@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GamePrototype"
-run/main_scene="res://levels/Level2D.tscn"
+run/main_scene="res://levels/debug/Level2D.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 SceneTransitionManager="*res://autoload/sceneTransitionManager/SceneTransitionManager.tscn"
 SaveSystem="*res://autoload/saveSystem/SaveSystem.gd"
+Analytics="*uid://crwb20qlw6enl"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GameAnalytics/plugin.cfg")
 
 [physics]
 
