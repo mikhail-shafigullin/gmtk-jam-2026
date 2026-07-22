@@ -30,6 +30,7 @@ offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_renb7")
+brush_color = Color(0.44313726, 0.7764706, 0.9647059, 1)
 
 [node name="UndoButton" type="Button" parent="." unique_id=822814031]
 layout_mode = 0
@@ -71,3 +72,22 @@ offset_right = 870.0
 offset_bottom = 221.0
 text = "00:00:30"
 label_settings = SubResource("LabelSettings_bxjw3")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="." unique_id=678957962]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 254.0
+offset_right = 425.0
+offset_bottom = 307.0
+color = Color(0.44217098, 0.7775121, 0.9658341, 1)
+
+[node name="HSlider" type="HSlider" parent="ColorPickerButton" unique_id=939942258]
+layout_mode = 0
+offset_left = -94.0
+offset_top = 89.0
+offset_right = 57.0
+offset_bottom = 105.0
+
+[connection signal="pressed" from="UndoButton" to="CanvasPanel" method="_on_undo_button_pressed"]
+[connection signal="pressed" from="RedoButton" to="CanvasPanel" method="_on_redo_button_pressed"]
+[connection signal="color_changed" from="ColorPickerButton" to="CanvasPanel" method="_on_color_picker_button_color_changed"]
