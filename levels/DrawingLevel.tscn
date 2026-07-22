@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d1bx5ed5ovjsv"]
+
+[node name="DrawingLevel" type="Node2D" unique_id=1660556958]
+
+[node name="Label" type="Label" parent="." unique_id=1636374567]
+offset_left = 88.0
+offset_top = 55.0
+offset_right = 128.0
+offset_bottom = 78.0
+text = "Drawing"

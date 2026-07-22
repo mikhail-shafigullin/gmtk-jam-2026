@@ -11,16 +11,19 @@ config_version=5
 [application]
 
 config/name="GMTK-GameJam-2026"
-run/main_scene="res://levels/debug/Level2D.tscn"
+run/main_scene="uid://d1bx5ed5ovjsv"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SceneTransitionManager="*res://autoload/sceneTransitionManager/SceneTransitionManager.tscn"
+EventBus="*uid://oj54oy6l1m8i"
 SaveSystem="*res://autoload/saveSystem/SaveSystem.gd"
 Analytics="*uid://crwb20qlw6enl"
 R="*uid://cd01mwnjjkes4"
+DebugUi="*uid://d2083624kn5ua"
+Global="*uid://0eeuqyvf87qn"
 
 [editor_plugins]
 

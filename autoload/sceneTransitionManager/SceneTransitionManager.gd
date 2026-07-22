@@ -11,6 +11,7 @@ const FADE_DURATION = 0.5
 
 var _isTransitioning: bool = false
 var _targetScenePath: String = ""
+var _sceneCache: Dictionary[String, Node] = {}
 
 func _input(event: InputEvent) -> void:
 	if _isTransitioning:
@@ -37,7 +38,7 @@ func _doFadeTransition() -> void:
 	tween.tween_property(fadeRect, "modulate:a", 1.0, FADE_DURATION)
 	await tween.finished
 
-	get_tree().change_scene_to_file(_targetScenePath)
+	_swapToScene(_getOrInstantiateScene(_targetScenePath))
 
 	tween = create_tween()
 	tween.tween_property(fadeRect, "modulate:a", 0.0, FADE_DURATION)
@@ -48,6 +49,13 @@ func _doLoadingScreenTransition() -> void:
 	loadingScreen.visible = true
 	loadingBar.value = 0.0
 	loadingLabel.text = "Loading..."
+
+	if _sceneCache.has(_targetScenePath):
+		loadingBar.value = 100.0
+		await get_tree().create_timer(0.3).timeout
+		_swapToScene(_sceneCache[_targetScenePath])
+		loadingScreen.visible = false
+		return
 
 	var error := ResourceLoader.load_threaded_request(_targetScenePath)
 	if error != OK:
@@ -73,6 +81,31 @@ func _doLoadingScreenTransition() -> void:
 	loadingBar.value = 100.0
 	await get_tree().create_timer(0.3).timeout
 
-	var scene: PackedScene = ResourceLoader.load_threaded_get(_targetScenePath)
-	get_tree().change_scene_to_packed(scene)
+	var packedScene: PackedScene = ResourceLoader.load_threaded_get(_targetScenePath)
+	_swapToScene(_getOrInstantiateScene(_targetScenePath, packedScene))
 	loadingScreen.visible = false
+
+func _getOrInstantiateScene(scenePath: String, packedScene: PackedScene = null) -> Node:
+	if _sceneCache.has(scenePath):
+		return _sceneCache[scenePath]
+
+	if packedScene == null:
+		packedScene = load(scenePath)
+	var scene := packedScene.instantiate()
+	_sceneCache[scenePath] = scene
+	return scene
+
+func _swapToScene(newScene: Node) -> void:
+	var root := get_tree().root
+	var oldScene := get_tree().current_scene
+
+	if oldScene != null and oldScene != newScene:
+		root.remove_child(oldScene)
+		var oldScenePath := oldScene.scene_file_path
+		if oldScenePath != "" and not _sceneCache.has(oldScenePath):
+			_sceneCache[oldScenePath] = oldScene
+
+	if newScene.get_parent() == null:
+		root.add_child(newScene)
+
+	get_tree().current_scene = newScene
