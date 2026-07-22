@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SceneTransitionManager="*res://autoload/sceneTransitionManager/SceneTransitionManager.tscn"
 SaveSystem="*res://autoload/saveSystem/SaveSystem.gd"
 Analytics="*uid://crwb20qlw6enl"
+R="*uid://cd01mwnjjkes4"
 
 [editor_plugins]
 
