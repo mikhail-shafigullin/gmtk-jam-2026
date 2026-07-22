@@ -1,0 +1,2 @@
+class_name PaintStroke
+extends RefCounted

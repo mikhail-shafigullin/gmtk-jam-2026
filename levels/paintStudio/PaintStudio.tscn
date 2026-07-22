@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://b4ac6i4i5d70c"]
+
+[ext_resource type="Script" uid="uid://b4pge0wlfsj0n" path="res://levels/paintStudio/CanvasPanel.gd" id="1_renb7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bxjw3"]
+font_size = 64
+
+[node name="PaintStudio" type="Control" unique_id=1199819418]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasPanel" type="Panel" parent="." unique_id=978056364]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_renb7")
+
+[node name="UndoButton" type="Button" parent="." unique_id=822814031]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 139.0
+offset_right = 505.0
+offset_bottom = 177.0
+text = "undo"
+
+[node name="RedoButton" type="Button" parent="." unique_id=554320948]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 141.0
+offset_right = 573.0
+offset_bottom = 178.0
+text = "redo"
+
+[node name="RedoButton2" type="Button" parent="." unique_id=948273166]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 92.0
+offset_right = 503.0
+offset_bottom = 129.0
+text = "draw"
+
+[node name="RedoButton3" type="Button" parent="." unique_id=1112731216]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 91.0
+offset_right = 574.0
+offset_bottom = 128.0
+text = "erase"
+
+[node name="Countdown" type="Label" parent="." unique_id=681063899]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 93.0
+offset_right = 870.0
+offset_bottom = 221.0
+text = "00:00:30"
+label_settings = SubResource("LabelSettings_bxjw3")
