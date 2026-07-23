@@ -1,10 +1,10 @@
 class_name LocationController
 extends Node
 
-const HUB_LEVEL_PATH = "res://levels/HubLevel.tscn"
-const DRAWING_LEVEL_PATH = "res://levels/DrawingLevel.tscn"
-const MUSEUM_LEVEL_PATH = "res://levels/MuseumLevel.tscn"
-const AUCTION_LEVEL_PATH = "res://levels/AuctionLevel.tscn"
+const HUB_LEVEL_PATH = "res://levels/hub/HubLevel.tscn"
+const DRAWING_LEVEL_PATH = "res://levels/drawing/DrawingLevel.tscn"
+const MUSEUM_LEVEL_PATH = "res://levels/museum/MuseumLevel.tscn"
+const AUCTION_LEVEL_PATH = "res://levels/auction/AuctionLevel.tscn"
 
 enum Location{ HUB, DRAWING, AUCTION, MUSEUM }
 

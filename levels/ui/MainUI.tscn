@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d2083624kn5ua"]
+
+[ext_resource type="Script" uid="uid://fnf7xyxwe7xp" path="res://levels/ui/MainUI.gd" id="1_script"]
+
+[node name="MainUI" type="Control" unique_id=926189020]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=112233445]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -203.0
+offset_top = 27.0
+offset_right = -31.0
+offset_bottom = 77.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=759474904]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1604809528]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Money:"
+horizontal_alignment = 2
+
+[node name="MoneyValue" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1875386365]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1589126253]
+layout_mode = 2
+
+[node name="FameLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1746147179]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Money:"
+horizontal_alignment = 2
+
+[node name="FameValue" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1062099783]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "value"

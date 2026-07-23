@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d1bx5ed5ovjsv"]
+
+[ext_resource type="Script" uid="uid://il7fcu7scsib" path="res://levels/drawing/DrawingLevel.gd" id="1_xvrt8"]
+
+[node name="DrawingLevel" type="Node2D" unique_id=1660556958]
+script = ExtResource("1_xvrt8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=677154182]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=647023626]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1636374567]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 55.0
+offset_right = 153.0
+offset_bottom = 78.0
+text = "Drawing"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=2106724666]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -126.0
+offset_right = -28.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="StudioButton" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=1613801224]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Studio"
