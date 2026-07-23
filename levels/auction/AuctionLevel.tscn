@@ -43,3 +43,92 @@ alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Studio"
+
+[node name="Control" type="Control" parent="CanvasLayer/Control" unique_id=548831110]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.5
+offset_top = -129.5
+offset_right = 129.5
+offset_bottom = 129.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Control" unique_id=1218258158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PaintingNameLabel" type="Label" parent="CanvasLayer/Control/Control/VBoxContainer" unique_id=1898918323]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<empty>"
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/Control/Control/VBoxContainer" unique_id=892754299]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1...2...3"
+
+[node name="CurrentCostLabel" type="Label" parent="CanvasLayer/Control/Control/VBoxContainer" unique_id=579694090]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CurrentUserAuction" type="Control" parent="CanvasLayer/Control/Control/VBoxContainer" unique_id=1972601362]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Control/VBoxContainer/CurrentUserAuction" unique_id=1390672493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SellPaintingButton" type="Button" parent="CanvasLayer/Control/Control/VBoxContainer/CurrentUserAuction/VBoxContainer" unique_id=1314632877]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sell Painting"
+
+[node name="AnotherUserAuction" type="Control" parent="CanvasLayer/Control/Control/VBoxContainer" unique_id=836669411]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Control/VBoxContainer/AnotherUserAuction" unique_id=2139149008]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button01" type="Button" parent="CanvasLayer/Control/Control/VBoxContainer/AnotherUserAuction/VBoxContainer" unique_id=428865955]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bid +0.1*cost"
+
+[node name="Button05" type="Button" parent="CanvasLayer/Control/Control/VBoxContainer/AnotherUserAuction/VBoxContainer" unique_id=971980190]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bid +0.5*cost"
+
+[node name="Button1" type="Button" parent="CanvasLayer/Control/Control/VBoxContainer/AnotherUserAuction/VBoxContainer" unique_id=1131146836]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bid +1.0*cost"
+
+[node name="AuctionTimer" type="Timer" parent="." unique_id=531188017]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true

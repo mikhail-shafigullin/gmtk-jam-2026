@@ -1,5 +1,6 @@
 class_name PlayerData
-extends Node
+extends Resource
 
+var playerName: String;
 var money: int;
 var fame: int;

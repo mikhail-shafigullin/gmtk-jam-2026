@@ -3,18 +3,23 @@ extends Node
 
 var playerData: PlayerData;
 var locationController: LocationController;
-var drawingController: DrawingController;
+var paintingController: PaintingController;
+var auctionController: AuctionController;
 var museumController: MuseumController;
 
 func _init() -> void:
 	locationController = LocationController.new();
-	drawingController = DrawingController.new();
+	paintingController = PaintingController.new();
 	museumController = MuseumController.new();
+	auctionController = AuctionController.new();
+	startGame();
 	pass;
 
 func startGame():
 	playerData = PlayerData.new();
-	goToLevelDrawing();
+	playerData.playerName = "PoopPlayer"
+	playerData.money = 0
+	playerData.fame = 0
 
 func goToLevelDrawing():
 	locationController.changeLevel(LocationController.Location.DRAWING);
@@ -37,11 +42,13 @@ func finishDrawingTimeLimit():
 func finishDrawing():
 	EventBus.drawing_finished.emit();
 
-func sendDrawing():
-	EventBus.drawing_sent.emit();
+func sendDrawing(texture: Texture2D):
+	var painting = paintingController.createPainting(texture);
+	auctionController.receivePaintingFromPlayer(painting);
+	EventBus.drawing_sent.emit(painting);
 
-func receiveDrawing():
-	EventBus.drawing_received.emit();
+func receiveDrawingFromOtherPlayer():
+	EventBus.drawing_received_from_other_player.emit();
 
 func bidAuctionSomeone():
 	EventBus.auction_someone_bid.emit();
@@ -63,4 +70,3 @@ func addMuseumPaintingMoney():
 
 func sellMuseumPainting():
 	EventBus.museum_painting_sold.emit();
-

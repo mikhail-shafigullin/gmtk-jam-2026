@@ -43,3 +43,61 @@ alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Studio"
+
+[node name="PaintingMenu" type="Control" parent="CanvasLayer/Control" unique_id=279023070]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -142.0
+offset_right = 159.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/PaintingMenu" unique_id=1602627645]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer" unique_id=1420005998]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer/HBoxContainer" unique_id=890404745]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00"
+
+[node name="PaintingIsReadyLabel" type="Label" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer/HBoxContainer" unique_id=1497623874]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "true"
+
+[node name="StartPaintingButton" type="Button" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer" unique_id=2141748639]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Painting"
+
+[node name="FinishPaintingButton" type="Button" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer" unique_id=1684506868]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Finish Painting"
+
+[node name="SendPaintingButton" type="Button" parent="CanvasLayer/Control/PaintingMenu/VBoxContainer" unique_id=1086438969]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send Painting To Auction"
+
+[node name="PaintingTimer" type="Timer" parent="." unique_id=797628202]
+unique_name_in_owner = true
+wait_time = 30.0
+one_shot = true

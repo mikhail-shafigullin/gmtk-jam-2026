@@ -24,6 +24,7 @@ Analytics="*uid://crwb20qlw6enl"
 R="*uid://cd01mwnjjkes4"
 MainUI="*uid://d2083624kn5ua"
 Global="*uid://0eeuqyvf87qn"
+EventLogger="*uid://b8y2jcgpilot0"
 
 [editor_plugins]
 
