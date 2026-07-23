@@ -49,6 +49,12 @@ func _setup_sprites():
 
 	resized.connect(_on_resized)
 
+func clear():
+	undo_position = 0
+	undo_stack.clear()
+	canvas.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, bg_color, false)
+	undo_stack.push_back(get_canvas_data())
+
 
 func _on_resized():
 	if preview and canvas:
@@ -88,9 +94,15 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	var mouse_pos := get_local_mouse_position()
 	preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		var pos := Vector2i(_pos_to_texture(mouse_pos))
-		brush.preview(preview, pos, brush_size, brush_color)
+	var pos := Vector2i(_pos_to_texture(mouse_pos))
+	brush.preview(preview, pos, brush_size, brush_color)
+
+	# if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	# 	preview_sprite.modulate.a = 1
+	# else:
+	# 	preview_sprite.modulate.a = 0.75
+
+
 
 func _pos_to_texture(pos: Vector2) -> Vector2:
 	return pos * (canvas.get_size() / size)
@@ -142,3 +154,7 @@ func _on_h_slider_value_changed(value: float) -> void:
 
 func _on_brush_selector_brush_selected(new_brush: PaintBrush) -> void:
 	brush = new_brush
+
+
+func _on_clear_button_pressed() -> void:
+	clear()

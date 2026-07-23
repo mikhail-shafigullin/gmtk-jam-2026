@@ -4,7 +4,7 @@ extends PaintBrush
 const square_texture := preload("res://levels/paintStudio/Brushes/textures/1x1.png")
 const sizes: Array[int] = [
 	1,
-	3,
+	2,
 	5,
 	7,
 	9,

@@ -43,7 +43,17 @@ offset_bottom = 76.0
 toggle_mode = true
 text = "line"
 
+[node name="MagicSprayCanBrushButton" type="Button" parent="." unique_id=224576550]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 94.0
+offset_right = 143.0
+offset_bottom = 125.0
+toggle_mode = true
+text = "magic spray can"
+
 [connection signal="pressed" from="SquareBrushButton" to="." method="_on_square_brush_button_pressed"]
 [connection signal="pressed" from="CircleBrushButton" to="." method="_on_circle_brush_button_pressed"]
 [connection signal="pressed" from="SprayCanBrushButton" to="." method="_on_spray_can_brush_button_pressed"]
 [connection signal="pressed" from="LineBrushButton" to="." method="_on_line_brush_button_pressed"]
+[connection signal="pressed" from="MagicSprayCanBrushButton" to="." method="_on_magic_spray_button_pressed"]

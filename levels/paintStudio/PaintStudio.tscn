@@ -57,13 +57,14 @@ offset_right = 503.0
 offset_bottom = 129.0
 text = "draw"
 
-[node name="RedoButton3" type="Button" parent="." unique_id=1112731216]
+[node name="ClearButton" type="Button" parent="." unique_id=1112731216]
+self_modulate = Color(10.5787325, 0.60991055, 0, 1)
 layout_mode = 0
 offset_left = 521.0
 offset_top = 91.0
 offset_right = 574.0
 offset_bottom = 128.0
-text = "erase"
+text = "clear"
 
 [node name="Countdown" type="Label" parent="." unique_id=681063899]
 layout_mode = 0
@@ -111,6 +112,7 @@ text = "erace toggle
 
 [connection signal="pressed" from="UndoButton" to="CanvasPanel" method="_on_undo_button_pressed"]
 [connection signal="pressed" from="RedoButton" to="CanvasPanel" method="_on_redo_button_pressed"]
+[connection signal="pressed" from="ClearButton" to="CanvasPanel" method="_on_clear_button_pressed"]
 [connection signal="color_changed" from="ColorPickerButton" to="CanvasPanel" method="_on_color_picker_button_color_changed"]
 [connection signal="value_changed" from="HSlider" to="CanvasPanel" method="_on_h_slider_value_changed"]
 [connection signal="brush_selected" from="BrushSelector" to="CanvasPanel" method="_on_brush_selector_brush_selected"]

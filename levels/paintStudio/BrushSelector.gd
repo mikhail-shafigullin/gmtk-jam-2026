@@ -6,6 +6,7 @@ var brushes: Dictionary[String, PaintBrush] = {
 	"circle" : CircleBrush.new(),
 	"square" : SquareBrush.new(),
 	"spray"	: SprayBrush.new(),
+	"magic_spray"	: MagicSprayBrush.new(),
 	"line" : LineBrush.new()
 }
 
@@ -13,6 +14,7 @@ var brushes: Dictionary[String, PaintBrush] = {
 @onready var square_button = $SquareBrushButton
 @onready var line_button = $LineBrushButton
 @onready var spray_button = $SprayCanBrushButton
+@onready var magic_spray_button = $MagicSprayCanBrushButton
 
 var busy: bool = false
 func select_brush(name: String):
@@ -31,6 +33,9 @@ func select_brush(name: String):
 		"spray":
 			spray_button.button_pressed = true
 			brush_selected.emit(brushes[name])
+		"magic_spray":
+			magic_spray_button.button_pressed = true
+			brush_selected.emit(brushes[name])
 
 func _on_square_brush_button_pressed() -> void:
 	select_brush("square")
@@ -46,3 +51,7 @@ func _on_spray_can_brush_button_pressed() -> void:
 
 func _on_line_brush_button_pressed() -> void:
 	select_brush("line")
+
+
+func _on_magic_spray_button_pressed() -> void:
+	select_brush("magic_spray")
