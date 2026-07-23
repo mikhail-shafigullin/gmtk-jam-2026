@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dvh7fjjy75ixf"]
+
+[ext_resource type="Script" uid="uid://cwidmtl1ll6ol" path="res://levels/paintStudio/BrushSelector.gd" id="1_87ijk"]
+
+[node name="BrushSelector" type="Control" unique_id=42331771]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 190.0
+offset_bottom = 100.0
+script = ExtResource("1_87ijk")
+
+[node name="SquareBrushButton" type="Button" parent="." unique_id=167047604]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+toggle_mode = true
+text = "square"
+
+[node name="CircleBrushButton" type="Button" parent="." unique_id=762560630]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 136.0
+offset_bottom = 33.0
+toggle_mode = true
+text = "circle"
+
+[node name="SprayCanBrushButton" type="Button" parent="." unique_id=967700183]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 63.0
+offset_bottom = 74.0
+toggle_mode = true
+text = "spray can"
+
+[node name="LineBrushButton" type="Button" parent="." unique_id=2137581511]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 45.0
+offset_right = 174.0
+offset_bottom = 76.0
+toggle_mode = true
+text = "line"
+
+[connection signal="pressed" from="SquareBrushButton" to="." method="_on_square_brush_button_pressed"]
+[connection signal="pressed" from="CircleBrushButton" to="." method="_on_circle_brush_button_pressed"]
+[connection signal="pressed" from="SprayCanBrushButton" to="." method="_on_spray_can_brush_button_pressed"]
+[connection signal="pressed" from="LineBrushButton" to="." method="_on_line_brush_button_pressed"]

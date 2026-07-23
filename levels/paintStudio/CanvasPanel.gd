@@ -1,8 +1,13 @@
 extends Panel
 
+signal brush_start(brush: PaintBrush)
+signal brush_stroke(brush: PaintBrush)
+signal brush_end(brush: PaintBrush)
+
 @export var bg_color := Color.BLACK
 @export var brush_color := Color.PINK
-@export var brush_size := Vector2i(8, 8)
+@export var brush_size: int = 5
+var brush: PaintBrush = SquareBrush.new()
 
 const IMG_SIZE := Vector2i(128, 128)
 const IMG_FORMAT := DrawableTexture2D.DRAWABLE_FORMAT_RGBA8
@@ -15,6 +20,8 @@ var canvas_sprite := Sprite2D.new()
 
 var undo_position: int = 0
 var undo_stack: Array[PackedByteArray] = []
+
+
 
 func _ready() -> void:
 	_setup_sprites()
@@ -50,17 +57,16 @@ func _on_resized():
 		canvas_sprite.transform = preview_sprite.transform
 
 
-var debug_circle: Texture = preload("uid://dvyip3m7d6tnx")
-var debug_brush := PaintBrush.new()
-
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == (MOUSE_BUTTON_LEFT):
 			var pos := Vector2i(_pos_to_texture(event.position))
 			if event.pressed:
-				debug_brush.on_start(canvas, pos, brush_size, brush_color)
+				brush.on_start(canvas, pos, brush_size, brush_color)
+				brush_start.emit(brush)
 			else:
-				debug_brush.on_end(canvas, pos, brush_size, brush_color)
+				brush.on_end(canvas, pos, brush_size, brush_color)
+				brush_end.emit(brush)
 				commit()
 	
 	elif event is InputEventMouseMotion:
@@ -68,7 +74,8 @@ func _gui_input(event: InputEvent) -> void:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			var to := Vector2i(_pos_to_texture(event.position))
 			var from := Vector2i(_pos_to_texture(event.position - event.relative))
-			debug_brush.paint(canvas, from, to, brush_size, brush_color)
+			brush.paint(canvas, from, to, brush_size, brush_color)
+			brush_stroke.emit(brush)
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -83,7 +90,7 @@ func _process(delta: float) -> void:
 	preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		var pos := Vector2i(_pos_to_texture(mouse_pos))
-		debug_brush.preview(preview, pos, brush_size, brush_color)
+		brush.preview(preview, pos, brush_size, brush_color)
 
 func _pos_to_texture(pos: Vector2) -> Vector2:
 	return pos * (canvas.get_size() / size)
@@ -127,3 +134,11 @@ func _on_redo_button_pressed() -> void:
 
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	brush_color = color
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	brush_size = int(value)
+
+
+func _on_brush_selector_brush_selected(new_brush: PaintBrush) -> void:
+	brush = new_brush

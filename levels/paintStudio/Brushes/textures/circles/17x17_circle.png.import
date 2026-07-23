@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvyip3m7d6tnx"
-path="res://.godot/imported/8x8_circle.png-5a063ead6501cc2e80614470b6d60b64.ctex"
+uid="uid://cmixxyly2lu0a"
+path="res://.godot/imported/17x17_circle.png-a4973e49c2784bb99f8873b52c7a6eca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/paintStudio/Brushes/8x8_circle.png"
-dest_files=["res://.godot/imported/8x8_circle.png-5a063ead6501cc2e80614470b6d60b64.ctex"]
+source_file="res://levels/paintStudio/Brushes/textures/circles/17x17_circle.png"
+dest_files=["res://.godot/imported/17x17_circle.png-a4973e49c2784bb99f8873b52c7a6eca.ctex"]
 
 [params]
 

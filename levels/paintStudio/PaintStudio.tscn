@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4ac6i4i5d70c"]
 
 [ext_resource type="Script" uid="uid://b4pge0wlfsj0n" path="res://levels/paintStudio/CanvasPanel.gd" id="1_renb7"]
+[ext_resource type="PackedScene" uid="uid://dvh7fjjy75ixf" path="res://levels/paintStudio/BrushSelector.tscn" id="2_abbnk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bxjw3"]
 font_size = 64
@@ -81,13 +82,35 @@ offset_right = 425.0
 offset_bottom = 307.0
 color = Color(0.44217098, 0.7775121, 0.9658341, 1)
 
-[node name="HSlider" type="HSlider" parent="ColorPickerButton" unique_id=939942258]
+[node name="HSlider" type="HSlider" parent="." unique_id=939942258]
 layout_mode = 0
-offset_left = -94.0
-offset_top = 89.0
-offset_right = 57.0
-offset_bottom = 105.0
+offset_left = 276.0
+offset_top = 343.0
+offset_right = 427.0
+offset_bottom = 359.0
+min_value = 1.0
+max_value = 9.0
+value = 5.0
+
+[node name="BrushSelector" parent="." unique_id=42331771 instance=ExtResource("2_abbnk")]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 514.0
+offset_right = 493.0
+offset_bottom = 614.0
+
+[node name="CircleBrushButton2" type="Button" parent="." unique_id=315805112]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 385.0
+offset_right = 426.0
+offset_bottom = 439.0
+toggle_mode = true
+text = "erace toggle
+(bg color as brush color)"
 
 [connection signal="pressed" from="UndoButton" to="CanvasPanel" method="_on_undo_button_pressed"]
 [connection signal="pressed" from="RedoButton" to="CanvasPanel" method="_on_redo_button_pressed"]
 [connection signal="color_changed" from="ColorPickerButton" to="CanvasPanel" method="_on_color_picker_button_color_changed"]
+[connection signal="value_changed" from="HSlider" to="CanvasPanel" method="_on_h_slider_value_changed"]
+[connection signal="brush_selected" from="BrushSelector" to="CanvasPanel" method="_on_brush_selector_brush_selected"]
