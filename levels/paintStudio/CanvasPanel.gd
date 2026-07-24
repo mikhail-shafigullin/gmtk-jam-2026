@@ -45,10 +45,10 @@ func set_is_active(status: bool) -> void:
 		painting_started.emit.call_deferred()
 
 	is_active = status
-
-
-	if not is_active and _is_painting:
-		on_paint_end()
+	
+	if not is_active:
+		if _is_painting:
+			on_paint_end()
 		preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
 
 		painting_finished.emit()

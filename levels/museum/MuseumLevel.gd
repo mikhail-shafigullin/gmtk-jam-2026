@@ -11,6 +11,7 @@ func _ready() -> void:
 			slots.push_back(c)
 			c.clicked.connect(on_slot_clicked.bind(c))
 
+
 func on_slot_clicked(slot: PaintingSlot):
 	print_debug("slot[%s] clicked on"%[slots.find(slot)])
 	slot.painting = PaintingLoader.read_random_file_res()

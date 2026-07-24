@@ -4,10 +4,6 @@ extends Control
 @onready var canvas: CanvasPanel = $CanvasPanel
 @onready var pallet: PaintingPallet = $Pallet
 
-func _process(_delta: float) -> void:
-	var data := canvas.get_data()
-	$test.text = str(data)
-
 
 func _ready() -> void:
 	EventBus.drawing_started.connect(start_painting)
@@ -21,6 +17,10 @@ func start_painting() -> void:
 
 func end_painting() -> void:
 	canvas.is_active = false
+
+
+func get_texture() -> DrawableTexture2D:
+	return canvas.canvas
 
 
 func save() -> void:

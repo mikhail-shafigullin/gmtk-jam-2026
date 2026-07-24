@@ -141,23 +141,6 @@ grow_vertical = 2
 script = ExtResource("1_renb7")
 brush_color = Color(0.44313726, 0.7764706, 0.9647059, 1)
 
-[node name="test" type="Label" parent="." unique_id=143744861]
-custom_minimum_size = Vector2(150, 300)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 166.5
-offset_top = -86.5
-offset_right = 503.5
-offset_bottom = 213.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "aoueoau oeau aoe uaoe uao euao ue ao"
-autowrap_mode = 3
-
 [node name="SaveButton" type="Button" parent="." unique_id=1558372826]
 layout_mode = 1
 anchors_preset = 8

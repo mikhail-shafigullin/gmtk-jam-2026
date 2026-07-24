@@ -8,6 +8,7 @@ extends Node2D
 @onready var timerLabel: Label = %TimerLabel;
 @onready var paintingIsReadyLabel: Label = %PaintingIsReadyLabel;
 @onready var paintStudio: PaintStudio = %PaintStudio
+@onready var paintThing: PaintThing = %PaintThing
 
 var isDrawingFinished: bool = false;
 
@@ -20,9 +21,14 @@ func _ready() -> void:
 	finishPaintingButton.disabled = true
 	sendPaintingButton.disabled = true
 	updatePaintingIsReadyLabel()
+	setup_paint_studio()
 
 func _process(_delta: float) -> void:
 	updateTimerLabel()
+
+func setup_paint_studio() -> void:
+	paintThing.set_texture(paintStudio.get_texture())
+	
 
 func onStartPaintingButtonPressed() -> void:
 	startPaintingButton.disabled = true

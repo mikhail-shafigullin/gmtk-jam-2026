@@ -2,16 +2,13 @@
 
 [ext_resource type="Script" uid="uid://il7fcu7scsib" path="res://levels/drawing/DrawingLevel.gd" id="1_xvrt8"]
 [ext_resource type="PackedScene" uid="uid://b4ac6i4i5d70c" path="res://levels/paintStudio/PaintStudio.tscn" id="2_jb2hy"]
+[ext_resource type="Texture2D" uid="uid://cv2k5dpvyh804" path="res://assets/ilufanArt/Fon_Hub.png" id="2_teufx"]
+[ext_resource type="PackedScene" uid="uid://bu8ay6hnyol3l" path="res://levels/drawing/PaintThing.tscn" id="3_ehhw7"]
 
 [node name="DrawingLevel" type="Node2D" unique_id=1660556958]
 script = ExtResource("1_xvrt8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=677154182]
-
-[node name="PaintStudio" parent="CanvasLayer" unique_id=1199819418 instance=ExtResource("2_jb2hy")]
-unique_name_in_owner = true
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=647023626]
 layout_mode = 3
@@ -21,6 +18,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/Control" unique_id=441673763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_teufx")
+stretch_mode = 3
+
+[node name="PaintThing" parent="CanvasLayer/Control" unique_id=481690252 instance=ExtResource("3_ehhw7")]
+unique_name_in_owner = true
+layout_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1636374567]
 layout_mode = 0
@@ -50,6 +61,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Studio"
 
+[node name="PaintStudio" parent="CanvasLayer/Control" unique_id=1199819418 instance=ExtResource("2_jb2hy")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.70500004
+anchor_bottom = 0.994
+offset_right = -0.16003418
+offset_bottom = -0.11199951
+
 [node name="PaintingMenu" type="Control" parent="CanvasLayer/Control" unique_id=279023070]
 layout_mode = 1
 anchors_preset = 8
@@ -57,12 +77,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -488.0
-offset_top = -132.0
-offset_right = -170.0
-offset_bottom = 152.0
+offset_left = 7.0
+offset_top = -212.0
+offset_right = 225.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_group_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/PaintingMenu" unique_id=1602627645]
 layout_mode = 1
