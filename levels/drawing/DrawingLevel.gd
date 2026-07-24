@@ -7,6 +7,7 @@ extends Node2D
 @onready var paintingTimer: Timer = %PaintingTimer;
 @onready var timerLabel: Label = %TimerLabel;
 @onready var paintingIsReadyLabel: Label = %PaintingIsReadyLabel;
+@onready var paintStudio: PaintStudio = %PaintStudio
 
 var isDrawingFinished: bool = false;
 

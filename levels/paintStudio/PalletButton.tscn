@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://btu0tcpq2ygdf"]
+
+[ext_resource type="Script" uid="uid://25l8wf41cl1k" path="res://levels/paintStudio/PalletButton.gd" id="1_4626q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4626q"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.76240396, 0.7624036, 0.76240367, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brkrr"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy0tl"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_lievs"]
+Button/styles/hover = SubResource("StyleBoxFlat_4626q")
+Button/styles/normal = SubResource("StyleBoxFlat_brkrr")
+Button/styles/pressed = SubResource("StyleBoxFlat_fy0tl")
+
+[node name="PalletButton" type="Button" unique_id=855015100]
+modulate = Color(4.209034e-05, 0.08650378, 0.3369421, 1)
+custom_minimum_size = Vector2(16, 16)
+offset_left = 48.0
+offset_top = 27.0
+offset_right = 82.0
+offset_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+theme = SubResource("Theme_lievs")
+toggle_mode = true
+script = ExtResource("1_4626q")

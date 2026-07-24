@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bdnjqogsqcy55"]
+
+[ext_resource type="Script" uid="uid://dgvsh4mb73312" path="res://tmp/image_loader.gd" id="1_1ohby"]
+
+[node name="ImageLoader" type="Control" unique_id=1731448038]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ohby")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=624757508]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=412230710]
+layout_mode = 0
+offset_right = 572.0
+offset_bottom = 539.0
+autowrap_mode = 3

@@ -22,8 +22,9 @@ EventBus="*uid://oj54oy6l1m8i"
 SaveSystem="*res://autoload/saveSystem/SaveSystem.gd"
 Analytics="*uid://crwb20qlw6enl"
 R="*uid://cd01mwnjjkes4"
-MainUI="*uid://d2083624kn5ua"
+DebugUi="*uid://d2083624kn5ua"
 Global="*uid://0eeuqyvf87qn"
+MainUI="*uid://d2083624kn5ua"
 EventLogger="*uid://b8y2jcgpilot0"
 
 [editor_plugins]

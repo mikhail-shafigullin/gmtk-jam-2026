@@ -1,13 +1,16 @@
+class_name CanvasPanel
 extends Panel
 
 signal brush_start(brush: PaintBrush)
-signal brush_stroke(brush: PaintBrush)
+signal brush_stroke(brush: PaintBrush, length: float)
 signal brush_end(brush: PaintBrush)
 
-@export var bg_color := Color.BLACK
+const pixel_texture := preload("res://levels/paintStudio/Brushes/textures/1x1.png")
+
+@export var bg_color := Color.WHITE
 @export var brush_color := Color.PINK
 @export var brush_size: int = 5
-var brush: PaintBrush = SquareBrush.new()
+var brush: PaintBrush = null
 
 const IMG_SIZE := Vector2i(128, 128)
 const IMG_FORMAT := DrawableTexture2D.DRAWABLE_FORMAT_RGBA8
@@ -21,12 +24,32 @@ var canvas_sprite := Sprite2D.new()
 var undo_position: int = 0
 var undo_stack: Array[PackedByteArray] = []
 
+var is_active: bool = false:
+	set=set_is_active
+var _is_painting: bool = false
+var _paint_start_time: int
+var _paint_current_length: float
+var paint_strokes: Array[BrushStroke] = []
+var paint_undo_count: int = 0
 
 
 func _ready() -> void:
 	_setup_sprites()
 	_on_resized()
 
+func set_is_active(status: bool) -> void:
+	if status and not is_active:
+		reset(true)
+
+	is_active = status
+
+	if not is_active and _is_painting:
+		on_paint_end()
+		preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
+
+
+func get_image() -> Image:
+	return canvas.get_image()
 
 
 func _setup_sprites():
@@ -44,16 +67,59 @@ func _setup_sprites():
 	preview_sprite.texture = preview
 	canvas_sprite.texture = canvas
 
-	undo_position = 0
-	undo_stack.push_back(get_canvas_data())
+	reset(true)
 
 	resized.connect(_on_resized)
 
-func clear():
+
+func get_data() -> PaintingData:
+	var data := PaintingData.new()
+	data.texture = ImageTexture.create_from_image(get_image())
+	data.undoCount = paint_undo_count
+	data.paintLength = get_paint_length()
+	data.paintStokes = get_paint_strokes_count()
+	data.paintTime = get_total_paint_time()
+	data.colorCount = get_unique_colors_count()
+	data.brushesCount = get_unique_brushes_count()
+
+	return data
+
+func get_paint_length() -> float:
+	var l: float = 0.0
+	for s: BrushStroke in paint_strokes:
+		l += s.length
+	return l
+
+func get_paint_strokes_count() -> int:
+	return paint_strokes.size()
+
+func get_total_paint_time() -> float:
+	var t: float = 0.0
+	for s: BrushStroke in paint_strokes:
+		t += s.time
+	return t
+
+func get_unique_colors_count() -> int:
+	var c: Dictionary[Color, int] = {}
+	for s: BrushStroke in paint_strokes:
+		c[s.color] = 1
+	return c.keys().size()
+
+func get_unique_brushes_count() -> int:
+	var b: Dictionary[String, int] = {}
+	for s: BrushStroke in paint_strokes:
+		b[str(s.brush)+"-"+str(s.size)] = 1
+	return b.keys().size()
+
+func reset(hard: bool = false):
 	undo_position = 0
 	undo_stack.clear()
 	canvas.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, bg_color, false)
 	undo_stack.push_back(get_canvas_data())
+
+	if hard:
+		paint_strokes.clear()
+		paint_undo_count = 0
 
 
 func _on_resized():
@@ -63,39 +129,78 @@ func _on_resized():
 		canvas_sprite.transform = preview_sprite.transform
 
 
+func on_paint_start() -> void:
+	if not _is_painting:
+		_is_painting = true
+
+		var pos := Vector2i(_pos_to_texture(get_local_mouse_position()))
+		brush.on_start(canvas, pos, brush_size, brush_color)
+		brush_start.emit(brush)
+
+		_paint_start_time = Time.get_ticks_msec() 
+		_paint_current_length = 0
+
+
+func on_paint_end() -> void:
+	if _is_painting:
+		_is_painting = false
+
+		var pos := Vector2i(_pos_to_texture(get_local_mouse_position()))
+		brush.on_end(canvas, pos, brush_size, brush_color)
+		brush_end.emit(brush)
+		commit()
+
+		var stroke := BrushStroke.new()
+		stroke.brush = brush
+		stroke.color = brush_color
+		stroke.size = brush_size
+		stroke.length = _paint_current_length
+		stroke.time = float(Time.get_ticks_msec() - _paint_start_time) / 1000.0
+		paint_strokes.push_back(stroke)
+
+
+func on_paint_stroke(length: float):
+	var grect := get_global_rect()
+	if grect.has_point(get_global_mouse_position()):
+		_paint_current_length += length
+	brush_stroke.emit(brush, length)
+
+
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == (MOUSE_BUTTON_LEFT):
-			var pos := Vector2i(_pos_to_texture(event.position))
-			if event.pressed:
-				brush.on_start(canvas, pos, brush_size, brush_color)
-				brush_start.emit(brush)
-			else:
-				brush.on_end(canvas, pos, brush_size, brush_color)
-				brush_end.emit(brush)
-				commit()
-	
-	elif event is InputEventMouseMotion:
-		# print_debug(event.position, event.relative)
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			var to := Vector2i(_pos_to_texture(event.position))
-			var from := Vector2i(_pos_to_texture(event.position - event.relative))
-			brush.paint(canvas, from, to, brush_size, brush_color)
-			brush_stroke.emit(brush)
+	if is_active:
+
+		if event is InputEventMouseButton:
+			if event.button_index == (MOUSE_BUTTON_LEFT):
+				if event.pressed:
+					on_paint_start()
+				else:
+					on_paint_end()
+		
+		elif event is InputEventMouseMotion:
+			# print_debug(event.position, event.relative)
+			if _is_painting and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				var to := Vector2i(_pos_to_texture(event.position))
+				var from := Vector2i(_pos_to_texture(event.position - event.relative))
+				brush.paint(canvas, from, to, brush_size, brush_color)
+				on_paint_stroke(event.relative.length())
 
 func _input(event: InputEvent) -> void:
-	if event.is_pressed():
-		if event.is_action("paint_undo"):
-			undo()
-		elif event.is_action("paint_redo"):
-			redo()
+	if is_active:
+
+		if event.is_pressed():
+			if event.is_action("paint_undo"):
+				undo()
+			elif event.is_action("paint_redo"):
+				redo()
 
 
 func _process(delta: float) -> void:
-	var mouse_pos := get_local_mouse_position()
-	preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
-	var pos := Vector2i(_pos_to_texture(mouse_pos))
-	brush.preview(preview, pos, brush_size, brush_color)
+	if is_active:
+		var mouse_pos := get_local_mouse_position()
+		preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
+		# preview.blit_rect(Rect2i(Vector2i.ZERO, IMG_SIZE), pixel_texture, Color.TRANSPARENT)
+		var pos := Vector2i(_pos_to_texture(mouse_pos))
+		brush.preview(preview, pos, brush_size, brush_color)
 
 	# if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 	# 	preview_sprite.modulate.a = 1
@@ -127,12 +232,20 @@ func commit() -> void:
 	undo_position += 1
 
 func undo() -> void:
-	undo_position = clampi(undo_position-1, 0, undo_stack.size()-1)
-	set_canvas_data(undo_stack[undo_position])
+	if is_active:
+		if undo_position > 0:
+			paint_undo_count += 1
+
+		undo_position = clampi(undo_position-1, 0, undo_stack.size()-1)
+		set_canvas_data(undo_stack[undo_position])
 
 func redo() -> void:
-	undo_position = clampi(undo_position+1, 0, undo_stack.size()-1)
-	set_canvas_data(undo_stack[undo_position])
+	if is_active:
+		if undo_position < undo_stack.size()-1:
+			paint_undo_count -= 1
+
+		undo_position = clampi(undo_position+1, 0, undo_stack.size()-1)
+		set_canvas_data(undo_stack[undo_position])
 
 func _on_undo_button_pressed() -> void:
 	undo()
@@ -157,4 +270,9 @@ func _on_brush_selector_brush_selected(new_brush: PaintBrush) -> void:
 
 
 func _on_clear_button_pressed() -> void:
-	clear()
+	if is_active:
+		reset()
+
+
+func _on_pallet_color_selected(color: Variant) -> void:
+	brush_color = color

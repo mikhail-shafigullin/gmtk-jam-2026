@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bpg7eeeu2oyf5"]
+
+[ext_resource type="Script" uid="uid://jb3hjjbna2vc" path="res://levels/paintStudio/PaintingPallet.gd" id="1_mju0a"]
+[ext_resource type="PackedScene" uid="uid://btu0tcpq2ygdf" path="res://levels/paintStudio/PalletButton.tscn" id="1_wfr86"]
+
+[node name="PaintingPallet" type="Control" unique_id=1206631791]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 105.0
+offset_top = 116.0
+offset_right = 308.0
+offset_bottom = 245.0
+script = ExtResource("1_mju0a")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=550243699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 8
+
+[node name="PalletButton" parent="GridContainer" unique_id=855015100 instance=ExtResource("1_wfr86")]
+layout_mode = 2
+
+[node name="PalletButton2" parent="GridContainer" unique_id=1131934414 instance=ExtResource("1_wfr86")]
+layout_mode = 2
+
+[node name="PalletButton3" parent="GridContainer" unique_id=1936674694 instance=ExtResource("1_wfr86")]
+layout_mode = 2

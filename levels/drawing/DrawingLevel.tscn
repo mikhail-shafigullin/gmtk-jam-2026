@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://d1bx5ed5ovjsv"]
 
 [ext_resource type="Script" uid="uid://il7fcu7scsib" path="res://levels/drawing/DrawingLevel.gd" id="1_xvrt8"]
+[ext_resource type="PackedScene" uid="uid://b4ac6i4i5d70c" path="res://levels/paintStudio/PaintStudio.tscn" id="2_jb2hy"]
 
 [node name="DrawingLevel" type="Node2D" unique_id=1660556958]
 script = ExtResource("1_xvrt8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=677154182]
+
+[node name="PaintStudio" parent="CanvasLayer" unique_id=1199819418 instance=ExtResource("2_jb2hy")]
+unique_name_in_owner = true
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=647023626]
 layout_mode = 3
@@ -51,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -159.0
-offset_top = -142.0
-offset_right = 159.0
-offset_bottom = 142.0
+offset_left = -488.0
+offset_top = -132.0
+offset_right = -170.0
+offset_bottom = 152.0
 grow_horizontal = 2
 grow_vertical = 2
 

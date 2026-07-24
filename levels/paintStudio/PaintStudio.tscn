@@ -1,16 +1,124 @@
 [gd_scene format=3 uid="uid://b4ac6i4i5d70c"]
 
 [ext_resource type="Script" uid="uid://b4pge0wlfsj0n" path="res://levels/paintStudio/CanvasPanel.gd" id="1_renb7"]
+[ext_resource type="Script" uid="uid://c65ixhxry1xfp" path="res://levels/paintStudio/PaintStudio.gd" id="1_yf0wb"]
 [ext_resource type="PackedScene" uid="uid://dvh7fjjy75ixf" path="res://levels/paintStudio/BrushSelector.tscn" id="2_abbnk"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_bxjw3"]
-font_size = 64
+[ext_resource type="PackedScene" uid="uid://bpg7eeeu2oyf5" path="res://levels/paintStudio/PaintingPallet.tscn" id="3_jml0v"]
 
 [node name="PaintStudio" type="Control" unique_id=1199819418]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -331.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yf0wb")
+
+[node name="UndoButton" type="Button" parent="." unique_id=822814031]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.5
+offset_top = -166.5
+offset_right = 80.5
+offset_bottom = -128.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "undo"
+
+[node name="RedoButton" type="Button" parent="." unique_id=554320948]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 83.5
+offset_top = -166.5
+offset_right = 136.5
+offset_bottom = -129.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "redo"
+
+[node name="ClearButton" type="Button" parent="." unique_id=1112731216]
+self_modulate = Color(10.5787325, 0.60991055, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 83.5
+offset_top = -206.5
+offset_right = 136.5
+offset_bottom = -169.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "clear"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="." unique_id=678957962]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = -192.5
+offset_right = -228.5
+offset_bottom = -139.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.44217098, 0.7775121, 0.9658341, 1)
+
+[node name="SizeSlider" type="HSlider" parent="." unique_id=939942258]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = 139.5
+offset_right = 130.5
+offset_bottom = 155.5
+grow_horizontal = 2
+grow_vertical = 2
+min_value = 1.0
+max_value = 9.0
+value = 5.0
+
+[node name="BrushSelector" parent="." unique_id=42331771 instance=ExtResource("2_abbnk")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.5
+offset_top = 170.5
+offset_right = -129.5
+offset_bottom = 270.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pallet" parent="." unique_id=1206631791 instance=ExtResource("3_jml0v")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.5
+offset_top = 171.5
+offset_right = 118.5
+offset_bottom = 261.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -33,86 +141,43 @@ grow_vertical = 2
 script = ExtResource("1_renb7")
 brush_color = Color(0.44313726, 0.7764706, 0.9647059, 1)
 
-[node name="UndoButton" type="Button" parent="." unique_id=822814031]
-layout_mode = 0
-offset_left = 453.0
-offset_top = 139.0
-offset_right = 505.0
-offset_bottom = 177.0
-text = "undo"
+[node name="test" type="Label" parent="." unique_id=143744861]
+custom_minimum_size = Vector2(150, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 166.5
+offset_top = -86.5
+offset_right = 503.5
+offset_bottom = 213.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "aoueoau oeau aoe uaoe uao euao ue ao"
+autowrap_mode = 3
 
-[node name="RedoButton" type="Button" parent="." unique_id=554320948]
-layout_mode = 0
-offset_left = 520.0
-offset_top = 141.0
-offset_right = 573.0
-offset_bottom = 178.0
-text = "redo"
-
-[node name="RedoButton2" type="Button" parent="." unique_id=948273166]
-layout_mode = 0
-offset_left = 450.0
-offset_top = 92.0
-offset_right = 503.0
-offset_bottom = 129.0
-text = "draw"
-
-[node name="ClearButton" type="Button" parent="." unique_id=1112731216]
-self_modulate = Color(10.5787325, 0.60991055, 0, 1)
-layout_mode = 0
-offset_left = 521.0
-offset_top = 91.0
-offset_right = 574.0
-offset_bottom = 128.0
-text = "clear"
-
-[node name="Countdown" type="Label" parent="." unique_id=681063899]
-layout_mode = 0
-offset_left = 615.0
-offset_top = 93.0
-offset_right = 870.0
-offset_bottom = 221.0
-text = "00:00:30"
-label_settings = SubResource("LabelSettings_bxjw3")
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="." unique_id=678957962]
-layout_mode = 0
-offset_left = 370.0
-offset_top = 254.0
-offset_right = 425.0
-offset_bottom = 307.0
-color = Color(0.44217098, 0.7775121, 0.9658341, 1)
-
-[node name="HSlider" type="HSlider" parent="." unique_id=939942258]
-layout_mode = 0
-offset_left = 276.0
-offset_top = 343.0
-offset_right = 427.0
-offset_bottom = 359.0
-min_value = 1.0
-max_value = 9.0
-value = 5.0
-
-[node name="BrushSelector" parent="." unique_id=42331771 instance=ExtResource("2_abbnk")]
-layout_mode = 0
-offset_left = 303.0
-offset_top = 514.0
-offset_right = 493.0
-offset_bottom = 614.0
-
-[node name="CircleBrushButton2" type="Button" parent="." unique_id=315805112]
-layout_mode = 0
-offset_left = 232.0
-offset_top = 385.0
-offset_right = 426.0
-offset_bottom = 439.0
-toggle_mode = true
-text = "erace toggle
-(bg color as brush color)"
+[node name="SaveButton" type="Button" parent="." unique_id=1558372826]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = 284.5
+offset_right = 84.5
+offset_bottom = 315.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SAVE IMAGE (res://tmp/)"
 
 [connection signal="pressed" from="UndoButton" to="CanvasPanel" method="_on_undo_button_pressed"]
 [connection signal="pressed" from="RedoButton" to="CanvasPanel" method="_on_redo_button_pressed"]
 [connection signal="pressed" from="ClearButton" to="CanvasPanel" method="_on_clear_button_pressed"]
 [connection signal="color_changed" from="ColorPickerButton" to="CanvasPanel" method="_on_color_picker_button_color_changed"]
-[connection signal="value_changed" from="HSlider" to="CanvasPanel" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="SizeSlider" to="CanvasPanel" method="_on_h_slider_value_changed"]
 [connection signal="brush_selected" from="BrushSelector" to="CanvasPanel" method="_on_brush_selector_brush_selected"]
+[connection signal="color_selected" from="Pallet" to="CanvasPanel" method="_on_pallet_color_selected"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]

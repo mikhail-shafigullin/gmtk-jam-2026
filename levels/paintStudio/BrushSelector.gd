@@ -16,7 +16,9 @@ var brushes: Dictionary[String, PaintBrush] = {
 @onready var spray_button = $SprayCanBrushButton
 @onready var magic_spray_button = $MagicSprayCanBrushButton
 
-var busy: bool = false
+func _ready() -> void:
+	select_brush("square")
+
 func select_brush(name: String):
 	for b: Button in get_children():
 		b.button_pressed = false
