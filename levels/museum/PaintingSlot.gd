@@ -44,7 +44,7 @@ func on_payout_timer() -> void:
 	pay_money(randi_range(10, 150))
 
 func pay_money(sum: int):
-	Global.gameCycle.playerData.money += sum
+	Global.gameCycle.updateMoney(sum);
 	pop_info("$%s"%sum)
 
 func pop_info(info: Variant):
