@@ -6,7 +6,7 @@ var enabled
 
 func _process(_delta: float) -> void:
 	var data := canvas.get_data()
-	$test.text = JSON.stringify(JSON.parse_string(data.serialize_stats()), "\t")
+	$test.text = str(data)
 
 func _ready() -> void:
 	EventBus.drawing_started.connect(start_painting)

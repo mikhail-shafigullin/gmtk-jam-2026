@@ -9,6 +9,5 @@ func _ready() -> void:
 func load_img():
 	var data := PaintingLoader.read_temp_file()
 	trect.texture = data.texture
-	data.texture = null
-	label.text = var_to_str(data)
+	label.text = str(data)
 	

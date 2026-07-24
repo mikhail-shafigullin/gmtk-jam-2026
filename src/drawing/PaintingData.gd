@@ -58,3 +58,21 @@ func deserialize_stats(from: String) -> Error:
 	maxPrice = dict.get_or_add(str(S_MAX_PRICE), 0)
 	return Error.OK
 	
+
+func _to_string() -> String:
+	return (
+		"""
+	title: %s,
+	texture: %s,
+	unique colors: %s,
+	unique brushes: %s,
+	undo count: %s,
+	painting strokes: %s,
+	painting time: %s,
+	painting length: %s,
+	initial fame: %s,
+	initial price: %s,
+	max price: %s
+		"""%[title, str(texture), colorCount, brushesCount, undoCount,
+		paintStokes, paintTime, paintLength, initialFame, initialPrice, maxPrice]
+	)
