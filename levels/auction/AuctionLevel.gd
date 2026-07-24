@@ -53,7 +53,7 @@ func initializeFromCurrentPaintings() -> void:
 
 func onDrawingSent(painting: PaintingData) -> void:
 	paintingNameLabel.text = painting.title if painting.title != "" else "<empty>"
-	currentCostLabel.text = str(painting.maxPrice)
+	currentCostLabel.text = str(painting.initialPrice)
 	currentUserAuction.visible = true
 	anotherUserAuction.visible = false
 	isPaintingTaken = false;

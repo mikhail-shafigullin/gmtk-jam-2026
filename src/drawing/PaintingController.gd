@@ -33,7 +33,7 @@ func createPainting(texture: Texture2D) -> PaintingData:
 	painting.texture = texture;
 	painting.title = generatePaintingTitle();
 	painting.initialFame = Global.gameCycle.playerData.fame;
-	painting.initialPrice = (painting.initialFame + 1) * 10;
+	painting.initialPrice = (painting.initialFame + 1) * 10 * randf_range(1.0, 2.0);
 	var maxPriceBonus: float = (painting.initialFame + 1) * 10 * randf_range(0.1, 3.0)
 	painting.maxPrice = painting.initialPrice + int(ceil(maxPriceBonus))
 	return painting;
