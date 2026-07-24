@@ -12,6 +12,9 @@ extends Node2D
 var isPaintingTaken = true;
 var isPaintingSold = false;
 
+var auctionRoundId: int = 0;
+var isAiRaiseScheduled: bool = false;
+
 func _ready() -> void:
 	studioButton.pressed.connect(func(): Global.gameCycle.goToLevelHub())
 	sellPaintingButton.pressed.connect(onSellPaintingButtonPressed)
@@ -57,6 +60,8 @@ func onDrawingSent(painting: PaintingData) -> void:
 	currentUserAuction.visible = true
 	anotherUserAuction.visible = false
 	isPaintingTaken = false;
+	auctionRoundId += 1;
+	isAiRaiseScheduled = false;
 
 func onDrawingReceivedFromOtherPlayer() -> void:
 	currentUserAuction.visible = false
@@ -69,11 +74,43 @@ func onAuctionSomeoneBid(cost: int) -> void:
 func onChangeLevel(location: LocationController.Location) -> void:
 	if location == LocationController.Location.AUCTION:
 		tryStartTimer()
+	else:
+		auctionRoundId += 1;
+		isAiRaiseScheduled = false;
 
 func tryStartTimer():
 	if !isPaintingTaken:
 		isPaintingSold = false;
 		auctionTimer.start()
+		scheduleAiRaiseIfNeeded()
+
+func scheduleAiRaiseIfNeeded() -> void:
+	if isAiRaiseScheduled or not currentUserAuction.visible:
+		return
+	isAiRaiseScheduled = true
+	scheduleAiRaise()
+
+func scheduleAiRaise() -> void:
+	var roundId: int = auctionRoundId
+	var delay: float = randf_range(0.5, Global.gameCycle.auctionController.AUCTION_TIMEOUT)
+	await get_tree().create_timer(delay).timeout
+
+	if roundId != auctionRoundId or isPaintingSold or isPaintingTaken or not currentUserAuction.visible:
+		isAiRaiseScheduled = false
+		return
+
+	var newPrice: int = Global.gameCycle.auctionController.tryRaisePrice()
+	if newPrice < 0:
+		isAiRaiseScheduled = false
+		return
+
+	Global.gameCycle.bidAuctionSomeone(newPrice)
+	auctionTimer.start()
+
+	if Global.gameCycle.auctionController.hasRaisesRemaining():
+		scheduleAiRaise()
+	else:
+		isAiRaiseScheduled = false
 
 func updateTimerLabel() -> void:
 	if(isPaintingSold):
@@ -95,6 +132,8 @@ func updateTimerLabel() -> void:
 func onAuctionTimerTimeout() -> void:
 	isPaintingSold = true
 	timerLabel.text = "Sold!!!"
+	auctionRoundId += 1;
+	isAiRaiseScheduled = false;
 
 func onSellPaintingButtonPressed() -> void:
 	Global.gameCycle.sellAuctionPainting(int(currentCostLabel.text))
@@ -102,3 +141,5 @@ func onSellPaintingButtonPressed() -> void:
 	currentUserAuction.visible = false
 	isPaintingTaken = true;
 	isPaintingSold = false;
+	auctionRoundId += 1;
+	isAiRaiseScheduled = false;
