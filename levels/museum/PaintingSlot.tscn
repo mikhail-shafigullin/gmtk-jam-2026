@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c0of7ewyqqk5f"]
+
+[ext_resource type="Script" uid="uid://cooswjp1w5um5" path="res://levels/museum/PaintingSlot.gd" id="1_8oqh3"]
+
+[node name="PaintingSlot" type="Area2D" unique_id=194778224]
+collision_layer = 256
+script = ExtResource("1_8oqh3")
+
+[node name="Texture" type="Polygon2D" parent="." unique_id=1646813666]
+light_mask = 0
+texture_filter = 5
+texture_repeat = 1
+antialiased = true
+polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+uv = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[node name="Collision" type="CollisionPolygon2D" parent="." unique_id=897490045]
+polygon = PackedVector2Array(0, 128, 128, 128, 64, 0)
+
+[node name="PayoutTimer" type="Timer" parent="." unique_id=1446047600]

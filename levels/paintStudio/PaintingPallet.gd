@@ -1,3 +1,4 @@
+class_name PaintingPallet
 extends Control
 
 signal color_selected(color)
@@ -9,10 +10,10 @@ const pallet_button_res := preload("res://levels/paintStudio/PalletButton.tscn")
 var buttons: Array[Button] = []
 
 var colors: Array[Color] = [
-	Color.WHITE,
-	Color.GRAY,
-	Color.DIM_GRAY,
 	Color.BLACK,
+	Color.DIM_GRAY,
+	Color.GRAY,
+	Color.WHITE,
 	Color.RED,
 	Color.DARK_RED,
 	Color.BLUE,
@@ -43,9 +44,10 @@ func _ready() -> void:
 
 
 func on_button_press(btn: Button):
+	select_btn(btn)
+
+func select_btn(btn: Button):
 	for b: Button in buttons:
 		b.button_pressed = false
 	btn.button_pressed = true
-
 	color_selected.emit(btn.modulate)
-	

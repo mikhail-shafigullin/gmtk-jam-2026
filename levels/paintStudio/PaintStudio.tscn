@@ -180,4 +180,5 @@ text = "SAVE IMAGE (res://tmp/)"
 [connection signal="value_changed" from="SizeSlider" to="CanvasPanel" method="_on_h_slider_value_changed"]
 [connection signal="brush_selected" from="BrushSelector" to="CanvasPanel" method="_on_brush_selector_brush_selected"]
 [connection signal="color_selected" from="Pallet" to="CanvasPanel" method="_on_pallet_color_selected"]
+[connection signal="painting_started" from="CanvasPanel" to="." method="_on_canvas_panel_painting_started"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]

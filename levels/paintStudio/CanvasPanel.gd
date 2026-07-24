@@ -1,6 +1,8 @@
 class_name CanvasPanel
 extends Panel
 
+signal painting_started()
+signal painting_finished()
 signal brush_start(brush: PaintBrush)
 signal brush_stroke(brush: PaintBrush, length: float)
 signal brush_end(brush: PaintBrush)
@@ -40,12 +42,16 @@ func _ready() -> void:
 func set_is_active(status: bool) -> void:
 	if status and not is_active:
 		reset(true)
+		painting_started.emit.call_deferred()
 
 	is_active = status
+
 
 	if not is_active and _is_painting:
 		on_paint_end()
 		preview.setup(IMG_SIZE.x, IMG_SIZE.y, IMG_FORMAT, Color.TRANSPARENT, false)
+
+		painting_finished.emit()
 
 
 func get_image() -> Image:
@@ -275,4 +281,8 @@ func _on_clear_button_pressed() -> void:
 
 
 func _on_pallet_color_selected(color: Variant) -> void:
-	brush_color = color
+	if is_active:
+		brush_color = color
+	else:
+		bg_color = color
+		reset()

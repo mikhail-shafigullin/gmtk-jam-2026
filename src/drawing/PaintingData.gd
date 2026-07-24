@@ -1,5 +1,5 @@
 class_name PaintingData
-extends RefCounted
+extends Resource
 
 enum {
 	S_BRUSHES,
@@ -14,17 +14,18 @@ enum {
 	S_TITLE
 }
 
-var texture: Texture2D;
-var title: String;
-var brushesCount: int;
-var colorCount: int;
-var paintTime: float;
-var paintStokes: int;
-var paintLength: int;
-var undoCount: int;
-var initialFame: int;
-var initialPrice: int;
-var maxPrice: int;
+
+@export var texture: Texture2D;
+@export var title: String;
+@export var brushesCount: int;
+@export var colorCount: int;
+@export var paintTime: float;
+@export var paintStokes: int;
+@export var paintLength: int;
+@export var undoCount: int;
+@export var initialFame: int;
+@export var initialPrice: int;
+@export var maxPrice: int;
 
 
 func serialize_stats() -> String:
@@ -40,6 +41,7 @@ func serialize_stats() -> String:
 		S_INIT_PRICE : initialPrice,
 		S_MAX_PRICE : maxPrice,
 	})
+
 
 func deserialize_stats(from: String) -> Error:
 	var dict: Dictionary = JSON.parse_string(from)
@@ -57,7 +59,7 @@ func deserialize_stats(from: String) -> Error:
 	initialPrice = dict.get_or_add(str(S_INIT_PRICE), 0)
 	maxPrice = dict.get_or_add(str(S_MAX_PRICE), 0)
 	return Error.OK
-	
+
 
 func _to_string() -> String:
 	return (

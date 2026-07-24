@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://disjui15phnv1"]
+
+[ext_resource type="Script" uid="uid://lcra6lmpvmop" path="res://levels/museum/InfoParticle.gd" id="1_d4pyi"]
+
+[node name="InfoParticle" type="Node2D" unique_id=1478737736]
+modulate = Color(0.2740847, 0.74723536, 0.29400647, 1)
+top_level = true
+script = ExtResource("1_d4pyi")
+
+[node name="Label" type="Label" parent="." unique_id=568561265]
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 10.0
+text = "300$"
