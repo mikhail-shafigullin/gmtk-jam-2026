@@ -28,13 +28,13 @@ const NOUNS = [
 	"Bad Decisions", "Expired Yogurt", "Monday Mornings", "Unpaid Taxes", "Wet Socks",
 ];
 
-func createPainting(texture: Texture2D):
+func createPainting(texture: Texture2D) -> PaintingData:
 	var painting = PaintingData.new();
 	painting.texture = texture;
 	painting.title = generatePaintingTitle();
 	painting.initialFame = Global.gameCycle.playerData.fame;
 	painting.initialPrice = (painting.initialFame + 1) * 10;
-	var maxPriceBonus: float = (painting.initialFame + 1) * 10 * randf_range(0.5, 5.0)
+	var maxPriceBonus: float = (painting.initialFame + 1) * 10 * randf_range(0.1, 3.0)
 	painting.maxPrice = painting.initialPrice + int(ceil(maxPriceBonus))
 	return painting;
 

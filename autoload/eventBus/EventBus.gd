@@ -1,6 +1,7 @@
 extends Node
 
 signal change_level(location: LocationController.Location)
+signal level_changed(location: LocationController.Location)
 
 # drawing
 signal drawing_started();
@@ -19,3 +20,7 @@ signal auction_painting_bought(cost: int)
 signal museum_painting_put()
 signal museum_painting_add_money()
 signal museum_painting_sold()
+
+# playerData
+signal updateMoney(deltaMoney: int);
+signal updateFame(deltaFame: int);

@@ -130,5 +130,5 @@ text = "Bid +1.0*cost"
 
 [node name="AuctionTimer" type="Timer" parent="." unique_id=531188017]
 unique_name_in_owner = true
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true

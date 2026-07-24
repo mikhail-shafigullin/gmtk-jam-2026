@@ -50,17 +50,20 @@ func sendDrawing(texture: Texture2D):
 func receiveDrawingFromOtherPlayer():
 	EventBus.drawing_received_from_other_player.emit();
 
-func bidAuctionSomeone():
-	EventBus.auction_someone_bid.emit();
+func bidAuctionSomeone(cost: int):
+	EventBus.auction_someone_bid.emit(cost);
 
-func sellAuctionPainting():
-	EventBus.auction_painting_sold.emit();
+func sellAuctionPainting(cost: int):
+	updateMoney(cost);
+	updateFame(1);
+	EventBus.auction_painting_sold.emit(cost);
 
-func bidAuctionUser():
-	EventBus.auction_user_bid.emit();
+func bidAuctionUser(cost: int):
+	EventBus.auction_user_bid.emit(cost);
 
-func buyAuctionPainting():
-	EventBus.auction_painting_bought.emit();
+func buyAuctionPainting(cost: int):
+	updateMoney(-cost);
+	EventBus.auction_painting_bought.emit(cost);
 
 func putMuseumPainting():
 	EventBus.museum_painting_put.emit();
@@ -70,3 +73,12 @@ func addMuseumPaintingMoney():
 
 func sellMuseumPainting():
 	EventBus.museum_painting_sold.emit();
+
+
+func updateMoney(deltaMoney: int):
+	playerData.money += + deltaMoney
+	EventBus.updateMoney.emit(deltaMoney)
+
+func updateFame(deltaFame: int):
+	playerData.fame += + deltaFame
+	EventBus.updateFame.emit(deltaFame)

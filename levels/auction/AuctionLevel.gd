@@ -18,8 +18,9 @@ func _ready() -> void:
 	EventBus.drawing_sent.connect(onDrawingSent)
 	EventBus.drawing_received_from_other_player.connect(onDrawingReceivedFromOtherPlayer)
 	EventBus.auction_someone_bid.connect(onAuctionSomeoneBid)
-	EventBus.change_level.connect(onChangeLevel)
+	EventBus.level_changed.connect(onChangeLevel)
 	auctionTimer.timeout.connect(onAuctionTimerTimeout)
+	auctionTimer.wait_time = Global.gameCycle.auctionController.AUCTION_TIMEOUT;
 	initializeFromCurrentPaintings()
 	tryStartTimer();
 	
@@ -52,6 +53,7 @@ func initializeFromCurrentPaintings() -> void:
 
 func onDrawingSent(painting: PaintingData) -> void:
 	paintingNameLabel.text = painting.title if painting.title != "" else "<empty>"
+	currentCostLabel.text = str(painting.maxPrice)
 	currentUserAuction.visible = true
 	anotherUserAuction.visible = false
 	isPaintingTaken = false;
@@ -81,11 +83,11 @@ func updateTimerLabel() -> void:
 		return
 	var timeLeft = auctionTimer.time_left
 	var cost = currentCostLabel.text
-	if timeLeft < 3:
+	if timeLeft < 1.5:
 		timerLabel.text = cost + " Three!!"
-	elif timeLeft < 6:
+	elif timeLeft < 3:
 		timerLabel.text = cost + " Two!"
-	elif timeLeft < 9:
+	elif timeLeft < 4.5:
 		timerLabel.text = cost + " One!"
 	else:
 		timerLabel.text = "";
@@ -95,7 +97,8 @@ func onAuctionTimerTimeout() -> void:
 	timerLabel.text = "Sold!!!"
 
 func onSellPaintingButtonPressed() -> void:
-	EventBus.auction_painting_sold.emit(int(currentCostLabel.text))
+	Global.gameCycle.sellAuctionPainting(int(currentCostLabel.text))
+	currentCostLabel.text = "";
 	currentUserAuction.visible = false
 	isPaintingTaken = true;
 	isPaintingSold = false;

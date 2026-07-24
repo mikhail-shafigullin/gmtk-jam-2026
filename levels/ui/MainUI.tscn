@@ -32,6 +32,7 @@ text = "Money:"
 horizontal_alignment = 2
 
 [node name="MoneyValue" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1875386365]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
@@ -42,10 +43,11 @@ layout_mode = 2
 [node name="FameLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1746147179]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Money:"
+text = "Fame:"
 horizontal_alignment = 2
 
 [node name="FameValue" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1062099783]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "value"
